@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+  <process id="sequenceflow" name="sequenceflow" isExecutable="true">
+    <startEvent id="startevent1" name="Start"></startEvent>
+    <endEvent id="endevent1" name="End"></endEvent>
+    <userTask id="申请请假" name="申请请假"></userTask>
+    <userTask id="部门经理审批" name="部门经理审批"></userTask>
+    <userTask id="总经理审批" name="总经理审批"></userTask>
+    <sequenceFlow id="flow1" sourceRef="startevent1" targetRef="申请请假"></sequenceFlow>
+    <sequenceFlow id="flow2" sourceRef="申请请假" targetRef="部门经理审批"></sequenceFlow>
+    <sequenceFlow id="flow3" name="to 总经理审批" sourceRef="部门经理审批" targetRef="总经理审批">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${day>3}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow4" sourceRef="总经理审批" targetRef="endevent1"></sequenceFlow>
+    <sequenceFlow id="flow5" name="to 结束" sourceRef="部门经理审批" targetRef="endevent1">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${day<=3&&day>1}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow6" sourceRef="部门经理审批" targetRef="申请请假">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${day==1}]]></conditionExpression>
+    </sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_sequenceflow">
+    <bpmndi:BPMNPlane bpmnElement="sequenceflow" id="BPMNPlane_sequenceflow">
+      <bpmndi:BPMNShape bpmnElement="startevent1" id="BPMNShape_startevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="300.0" y="50.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent1" id="BPMNShape_endevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="360.0" y="460.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="申请请假" id="BPMNShape_申请请假">
+        <omgdc:Bounds height="55.0" width="105.0" x="270.0" y="120.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="部门经理审批" id="BPMNShape_部门经理审批">
+        <omgdc:Bounds height="55.0" width="105.0" x="280.0" y="220.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="总经理审批" id="BPMNShape_总经理审批">
+        <omgdc:Bounds height="55.0" width="105.0" x="450.0" y="330.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
+        <omgdi:waypoint x="317.0" y="85.0"></omgdi:waypoint>
+        <omgdi:waypoint x="322.0" y="120.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
+        <omgdi:waypoint x="322.0" y="175.0"></omgdi:waypoint>
+        <omgdi:waypoint x="332.0" y="220.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow3" id="BPMNEdge_flow3">
+        <omgdi:waypoint x="332.0" y="275.0"></omgdi:waypoint>
+        <omgdi:waypoint x="502.0" y="330.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="72.0" x="377.0" y="290.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow4" id="BPMNEdge_flow4">
+        <omgdi:waypoint x="502.0" y="385.0"></omgdi:waypoint>
+        <omgdi:waypoint x="377.0" y="460.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow5" id="BPMNEdge_flow5">
+        <omgdi:waypoint x="332.0" y="275.0"></omgdi:waypoint>
+        <omgdi:waypoint x="377.0" y="460.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="36.0" x="310.0" y="379.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow6" id="BPMNEdge_flow6">
+        <omgdi:waypoint x="332.0" y="220.0"></omgdi:waypoint>
+        <omgdi:waypoint x="486.0" y="195.0"></omgdi:waypoint>
+        <omgdi:waypoint x="322.0" y="175.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
